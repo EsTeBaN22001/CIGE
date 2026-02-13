@@ -29,6 +29,17 @@ const services = {
       'Constitución de LLC o C/Corp en EEUU, obtención de EIN, cuenta bancaria, cumplimiento de presentaciones ante el IRS.'
     ]
   },
+  impositiva: {
+    icon: 'fa-solid fa-book-bookmark',
+    title: 'Impositiva',
+    items: [
+      'Inscripciones ARCA, ingresos brutos, municipalidad',
+      'Elaboración y presentación de declaraciones juradas mensuales (iva, ingresos brutos, convenio multilateral, F.931, canón municipal)',
+      'Elaboración y presentación de declaraciones juradas anuales (Ganancias, bienes personales, ganancia mínima presunta, ingresos brutos)',
+      'Inspecciones fiscales. Embargos',
+      'Planes de facilidades de pago'
+    ]
+  },
   juridica: {
     icon: 'fa-solid fa-gavel',
     title: 'Jurídica',
@@ -177,8 +188,21 @@ document.addEventListener('keydown', e => {
 // Contact form
 const form = document.getElementById('contactForm')
 const success = document.getElementById('formSuccess')
-form.addEventListener('submit', function (e) {
-  e.preventDefault()
-  form.style.display = 'none'
-  success.style.display = 'flex'
-})
+form.addEventListener('submit', handleSubmit)
+
+async function handleSubmit(event) {
+  event.preventDefault()
+  const data = new FormData(this)
+  const response = await fetch(this.action, {
+    method: this.method,
+    body: data,
+    headers: {
+      Accept: 'application/json'
+    }
+  })
+
+  if (response.ok) {
+    form.style.display = 'none'
+    success.style.display = 'flex'
+  }
+}
