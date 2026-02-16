@@ -789,9 +789,13 @@ body {
 
   /* Values */
   .values-grid {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     gap: 16px;
     margin-top: 28px;
+  }
+
+  .about-image {
+    display: none;
   }
 
   /* Services */
